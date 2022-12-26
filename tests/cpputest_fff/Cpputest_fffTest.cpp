@@ -33,3 +33,8 @@ TEST(Cpputest_fff, HelloFakeWorld)
   UI_init();
   LONGS_EQUAL(DISPLAY_init_fake.call_count, 1);
 }
+
+TEST(Cpputest_fff, CapturingArguments)
+{
+  FAIL("Start here");
+}
