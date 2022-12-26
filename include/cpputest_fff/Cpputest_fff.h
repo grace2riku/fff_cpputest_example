@@ -10,6 +10,7 @@
 void Cpputest_fff_Create(void);
 void Cpputest_fff_Destroy(void);
 
+void UI_init();
 void DISPLAY_init();
 
 #endif  /* D_FakeCpputest_fff_H */

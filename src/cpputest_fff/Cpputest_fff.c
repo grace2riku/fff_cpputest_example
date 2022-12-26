@@ -2,11 +2,14 @@
 
 void Cpputest_fff_Create(void)
 {
-    DISPLAY_init();
 }
 
 void Cpputest_fff_Destroy(void)
 {
+}
+
+void UI_init() {
+    DISPLAY_init();
 }
 
 void DISPLAY_init();

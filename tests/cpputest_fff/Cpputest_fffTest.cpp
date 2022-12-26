@@ -30,5 +30,6 @@ IGNORE_TEST(Cpputest_fff, Create)
 TEST(Cpputest_fff, HelloFakeWorld)
 {
 //  FAIL("Start here");
+  UI_init();
   LONGS_EQUAL(DISPLAY_init_fake.call_count, 1);
 }
