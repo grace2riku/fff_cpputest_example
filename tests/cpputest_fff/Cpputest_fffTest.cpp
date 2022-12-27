@@ -1,3 +1,8 @@
+// Want to keep the argument history for 13 calls
+#define FFF_ARG_HISTORY_LEN 13
+// Want to keep the call sequence history for 17 calls
+#define FFF_CALL_HISTORY_LEN 17
+
 extern "C"
 {
 #include "Cpputest_fff.h"
@@ -101,11 +106,7 @@ TEST(Cpputest_fff, DefaultArgumentHistory)
 TEST(Cpputest_fff, when_fake_func_called_max_times_plus_one_then_one_argument_history_dropped)
 {
     int i;
-//    for(i = 0; i < 10; i++) // voidfunc2_fake.arg_histories_dropped = 0
-//    for(i = 0; i < 30; i++) // voidfunc2_fake.arg_histories_dropped = 0
-//    for(i = 0; i < 40; i++) // voidfunc2_fake.arg_histories_dropped = 0
-//    for(i = 0; i < 49; i++) // voidfunc2_fake.arg_histories_dropped = 0
-    for(i = 0; i < 50; i++) // voidfunc2_fake.arg_histories_dropped = 1
+    for(i = 0; i < 13; i++)
     {
         voidfunc2('1'+i, '2'+i);
     }
