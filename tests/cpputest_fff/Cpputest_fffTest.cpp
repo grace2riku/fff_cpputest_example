@@ -8,6 +8,7 @@ extern "C"
 
 DEFINE_FFF_GLOBALS;
 FAKE_VOID_FUNC(DISPLAY_init);
+FAKE_VOID_FUNC(DISPLAY_output, char*);
 
 TEST_GROUP(Cpputest_fff)
 {
@@ -36,5 +37,10 @@ TEST(Cpputest_fff, HelloFakeWorld)
 
 TEST(Cpputest_fff, CapturingArguments)
 {
-  FAIL("Start here");
+  char msg[] = "hello, world";
+
+  UI_write_line(msg);
+  LONGS_EQUAL(DISPLAY_output_fake.call_count, 1);
+  STRCMP_EQUAL(DISPLAY_output_fake.arg0_val, "hello, world");   // こっちはテスト成功する
+//  STRCMP_EQUAL(DISPLAY_output_fake.arg0_val, "hello, worl");  // こっちはテスト失敗する
 }
