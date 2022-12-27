@@ -21,6 +21,9 @@ TEST_GROUP(Cpputest_fff)
       Cpputest_fff_Create();
 
       RESET_FAKE(DISPLAY_init);
+
+      /* reset common FFF internal structures */
+      FFF_RESET_HISTORY();      
     }
 
     void teardown()
@@ -79,4 +82,16 @@ TEST(Cpputest_fff, CallHistory)
   POINTERS_EQUAL(fff.call_history[0], (void*)longfunc0);
   POINTERS_EQUAL(fff.call_history[1], (void*)voidfunc2);
   POINTERS_EQUAL(fff.call_history[2], (void*)longfunc0);  
+}
+
+TEST(Cpputest_fff, DefaultArgumentHistory)
+{
+  voidfunc2('g', 'h');
+  voidfunc2('i', 'j');
+
+
+  CHECK_EQUAL('g', voidfunc2_fake.arg0_history[0]);
+  CHECK_EQUAL('h', voidfunc2_fake.arg1_history[0]);
+  CHECK_EQUAL('i', voidfunc2_fake.arg0_history[1]);
+  CHECK_EQUAL('j', voidfunc2_fake.arg1_history[1]);
 }
