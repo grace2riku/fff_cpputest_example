@@ -21,6 +21,7 @@ TEST_GROUP(Cpputest_fff)
       Cpputest_fff_Create();
 
       RESET_FAKE(DISPLAY_init);
+      RESET_FAKE(voidfunc2);
 
       /* reset common FFF internal structures */
       FFF_RESET_HISTORY();      
@@ -94,4 +95,25 @@ TEST(Cpputest_fff, DefaultArgumentHistory)
   CHECK_EQUAL('h', voidfunc2_fake.arg1_history[0]);
   CHECK_EQUAL('i', voidfunc2_fake.arg0_history[1]);
   CHECK_EQUAL('j', voidfunc2_fake.arg1_history[1]);
+}
+
+
+TEST(Cpputest_fff, when_fake_func_called_max_times_plus_one_then_one_argument_history_dropped)
+{
+    int i;
+//    for(i = 0; i < 10; i++) // voidfunc2_fake.arg_histories_dropped = 0
+//    for(i = 0; i < 30; i++) // voidfunc2_fake.arg_histories_dropped = 0
+//    for(i = 0; i < 40; i++) // voidfunc2_fake.arg_histories_dropped = 0
+//    for(i = 0; i < 49; i++) // voidfunc2_fake.arg_histories_dropped = 0
+    for(i = 0; i < 50; i++) // voidfunc2_fake.arg_histories_dropped = 1
+    {
+        voidfunc2('1'+i, '2'+i);
+    }
+    voidfunc2('1', '2');
+    LONGS_EQUAL(1u, voidfunc2_fake.arg_histories_dropped);
+
+    printf("\nvoidfunc2_fake.arg_history_len = %d, voidfunc2_fake.call_count = %d\n", 
+      voidfunc2_fake.arg_history_len, voidfunc2_fake.call_count);
+
+    CHECK(voidfunc2_fake.arg_history_len < voidfunc2_fake.call_count);
 }
