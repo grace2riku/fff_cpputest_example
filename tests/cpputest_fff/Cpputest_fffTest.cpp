@@ -18,6 +18,8 @@ TEST_GROUP(Cpputest_fff)
     void setup()
     {
       Cpputest_fff_Create();
+
+      RESET_FAKE(DISPLAY_init);
     }
 
     void teardown()
@@ -55,4 +57,10 @@ TEST(Cpputest_fff, ReturnValues)
 
   LONGS_EQUAL(Test_DISPLAY_get_line_insert_index(), 2);
   LONGS_EQUAL(Test_DISPLAY_get_line_capacity(), 3);
+}
+
+TEST(Cpputest_fff, Resetting_a_Fake)
+{
+  UI_init();
+  LONGS_EQUAL(DISPLAY_init_fake.call_count, 1);
 }
