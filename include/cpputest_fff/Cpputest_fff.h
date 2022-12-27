@@ -12,9 +12,13 @@ void Cpputest_fff_Destroy(void);
 
 void UI_init();
 void UI_write_line(char* message);
+unsigned int Test_DISPLAY_get_line_capacity();
+unsigned int Test_DISPLAY_get_line_insert_index();
 
 // fake function
 void DISPLAY_init();
 void DISPLAY_output(char* message);
+unsigned int DISPLAY_get_line_capacity();
+unsigned int DISPLAY_get_line_insert_index();
 
 #endif  /* D_FakeCpputest_fff_H */

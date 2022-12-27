@@ -9,6 +9,9 @@ extern "C"
 DEFINE_FFF_GLOBALS;
 FAKE_VOID_FUNC(DISPLAY_init);
 FAKE_VOID_FUNC(DISPLAY_output, char*);
+FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_capacity);
+FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_insert_index);
+
 
 TEST_GROUP(Cpputest_fff)
 {
@@ -43,4 +46,13 @@ TEST(Cpputest_fff, CapturingArguments)
   LONGS_EQUAL(DISPLAY_output_fake.call_count, 1);
   STRCMP_EQUAL(DISPLAY_output_fake.arg0_val, "hello, world");   // こっちはテスト成功する
 //  STRCMP_EQUAL(DISPLAY_output_fake.arg0_val, "hello, worl");  // こっちはテスト失敗する
+}
+
+TEST(Cpputest_fff, ReturnValues)
+{
+  DISPLAY_get_line_insert_index_fake.return_val = 2;
+  DISPLAY_get_line_capacity_fake.return_val = 3;
+
+  LONGS_EQUAL(Test_DISPLAY_get_line_insert_index(), 2);
+  LONGS_EQUAL(Test_DISPLAY_get_line_capacity(), 3);
 }

@@ -16,6 +16,10 @@ void UI_write_line(char* message){
     DISPLAY_output(message);
 }
 
+unsigned int Test_DISPLAY_get_line_capacity() {
+    return DISPLAY_get_line_capacity();
+}
 
-//void DISPLAY_init();
-//void DISPLAY_output(char* message);
+unsigned int Test_DISPLAY_get_line_insert_index() {
+    return DISPLAY_get_line_insert_index();
+}
