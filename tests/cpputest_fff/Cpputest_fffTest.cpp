@@ -11,7 +11,8 @@ FAKE_VOID_FUNC(DISPLAY_init);
 FAKE_VOID_FUNC(DISPLAY_output, char*);
 FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_capacity);
 FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_insert_index);
-
+FAKE_VOID_FUNC(voidfunc2, char, char);
+FAKE_VALUE_FUNC(long, longfunc0);
 
 TEST_GROUP(Cpputest_fff)
 {
@@ -50,6 +51,7 @@ TEST(Cpputest_fff, CapturingArguments)
 //  STRCMP_EQUAL(DISPLAY_output_fake.arg0_val, "hello, worl");  // こっちはテスト失敗する
 }
 
+
 TEST(Cpputest_fff, ReturnValues)
 {
   DISPLAY_get_line_insert_index_fake.return_val = 2;
@@ -59,8 +61,22 @@ TEST(Cpputest_fff, ReturnValues)
   LONGS_EQUAL(Test_DISPLAY_get_line_capacity(), 3);
 }
 
+
 TEST(Cpputest_fff, Resetting_a_Fake)
 {
   UI_init();
   LONGS_EQUAL(DISPLAY_init_fake.call_count, 1);
+}
+
+
+TEST(Cpputest_fff, CallHistory)
+{
+//  FAIL("fail");
+  longfunc0();
+  voidfunc2('a', 'b');
+  longfunc0();
+
+  POINTERS_EQUAL(fff.call_history[0], (void*)longfunc0);
+  POINTERS_EQUAL(fff.call_history[1], (void*)voidfunc2);
+  POINTERS_EQUAL(fff.call_history[2], (void*)longfunc0);  
 }
