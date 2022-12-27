@@ -118,3 +118,18 @@ TEST(Cpputest_fff, when_fake_func_called_max_times_plus_one_then_one_argument_hi
 
     CHECK(voidfunc2_fake.arg_history_len < voidfunc2_fake.call_count);
 }
+
+
+TEST(Cpputest_fff, FunctionReturnValueSequences)
+{
+  long myReturnVals[3] = {3, 7, 9};
+  SET_RETURN_SEQ(longfunc0, myReturnVals, 3);
+
+  LONGS_EQUAL(myReturnVals[0], longfunc0());
+
+  LONGS_EQUAL(myReturnVals[1], longfunc0());
+
+  LONGS_EQUAL(myReturnVals[2], longfunc0());
+  LONGS_EQUAL(myReturnVals[2], longfunc0());
+  LONGS_EQUAL(myReturnVals[2], longfunc0());
+}
