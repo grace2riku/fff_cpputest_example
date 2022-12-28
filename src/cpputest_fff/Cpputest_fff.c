@@ -23,3 +23,7 @@ unsigned int Test_DISPLAY_get_line_capacity() {
 unsigned int Test_DISPLAY_get_line_insert_index() {
     return DISPLAY_get_line_insert_index();
 }
+
+long my_custom_value_fake(void) {
+    return MEANING_OF_LIFE;
+}

@@ -27,6 +27,7 @@ TEST_GROUP(Cpputest_fff)
 
       RESET_FAKE(DISPLAY_init);
       RESET_FAKE(voidfunc2);
+      RESET_FAKE(longfunc0);
 
       /* reset common FFF internal structures */
       FFF_RESET_HISTORY();      
@@ -132,4 +133,12 @@ TEST(Cpputest_fff, FunctionReturnValueSequences)
   LONGS_EQUAL(myReturnVals[2], longfunc0());
   LONGS_EQUAL(myReturnVals[2], longfunc0());
   LONGS_EQUAL(myReturnVals[2], longfunc0());
+}
+
+
+TEST(Cpputest_fff, CustomReturnValueDelegate)
+{
+  longfunc0_fake.custom_fake = my_custom_value_fake;
+  long retval = longfunc0();
+  LONGS_EQUAL(MEANING_OF_LIFE, retval);
 }

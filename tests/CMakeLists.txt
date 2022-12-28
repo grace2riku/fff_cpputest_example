@@ -8,7 +8,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR} ${PROJECT_SOURCE_DIR}/include)
 
 # プリプロセッサ出力
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -save-temps")
 #target_compile_options(${PROJECT_NAME} -save-temps)    // これはエラーになる
 
 # include CppUTest headers
