@@ -18,6 +18,8 @@ FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_capacity);
 FAKE_VALUE_FUNC(unsigned int, DISPLAY_get_line_insert_index);
 FAKE_VOID_FUNC(voidfunc2, char, char);
 FAKE_VALUE_FUNC(long, longfunc0);
+FAKE_VOID_FUNC(voidfunc1outparam, char*);
+
 
 TEST_GROUP(Cpputest_fff)
 {
@@ -28,6 +30,7 @@ TEST_GROUP(Cpputest_fff)
       RESET_FAKE(DISPLAY_init);
       RESET_FAKE(voidfunc2);
       RESET_FAKE(longfunc0);
+      RESET_FAKE(voidfunc1outparam);
 
       /* reset common FFF internal structures */
       FFF_RESET_HISTORY();      
@@ -141,4 +144,24 @@ TEST(Cpputest_fff, CustomReturnValueDelegate)
   longfunc0_fake.custom_fake = my_custom_value_fake;
   long retval = longfunc0();
   LONGS_EQUAL(MEANING_OF_LIFE, retval);
+}
+
+TEST(Cpputest_fff, CustomReturnValueDelegateSequences)
+{
+  void (*custom_fake[])(char*) = {voidfunc1outputparam_custom_fake1,
+                                  voidfunc1outputparam_custom_fake2,
+                                  voidfunc1outputparam_custom_fake3};
+  char a = 'a';
+
+  SET_CUSTOM_FAKE_SEQ(voidfunc1outparam, custom_fake, 3);
+
+  voidfunc1outparam(&a);
+  CHECK_EQUAL('x', a);
+  voidfunc1outparam(&a);
+  CHECK_EQUAL('y', a);
+  voidfunc1outparam(&a);
+  CHECK_EQUAL('z', a);
+
+  voidfunc1outparam(&a);
+  CHECK_EQUAL('z', a);
 }

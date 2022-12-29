@@ -24,4 +24,9 @@ void DISPLAY_output(char* message);
 unsigned int DISPLAY_get_line_capacity();
 unsigned int DISPLAY_get_line_insert_index();
 
+void voidfunc1outputparam_custom_fake1(char* a);
+void voidfunc1outputparam_custom_fake2(char* a);
+void voidfunc1outputparam_custom_fake3(char* a);
+
+
 #endif  /* D_FakeCpputest_fff_H */
