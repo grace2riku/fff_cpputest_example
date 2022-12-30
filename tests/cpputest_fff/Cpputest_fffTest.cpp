@@ -46,11 +46,6 @@ TEST_GROUP(Cpputest_fff)
     }
 };
 
-IGNORE_TEST(Cpputest_fff, Create)
-{
-  FAIL("Start here");
-}
-
 TEST(Cpputest_fff, HelloFakeWorld)
 {
 //  FAIL("Start here");
