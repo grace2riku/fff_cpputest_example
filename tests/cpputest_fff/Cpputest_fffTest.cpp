@@ -20,6 +20,13 @@ FAKE_VOID_FUNC(voidfunc2, char, char);
 FAKE_VALUE_FUNC(long, longfunc0);
 FAKE_VOID_FUNC(voidfunc1outparam, char*);
 
+/* List of fakes used by unit tester */
+#define FFF_FAKES_LIST(FAKE)  \
+  FAKE(DISPLAY_init)          \
+  FAKE(voidfunc2)             \
+  FAKE(longfunc0)             \
+  FAKE(voidfunc1outparam)
+
 
 TEST_GROUP(Cpputest_fff)
 {
@@ -27,10 +34,7 @@ TEST_GROUP(Cpputest_fff)
     {
       Cpputest_fff_Create();
 
-      RESET_FAKE(DISPLAY_init);
-      RESET_FAKE(voidfunc2);
-      RESET_FAKE(longfunc0);
-      RESET_FAKE(voidfunc1outparam);
+      FFF_FAKES_LIST(RESET_FAKE);
 
       /* reset common FFF internal structures */
       FFF_RESET_HISTORY();      
