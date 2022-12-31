@@ -164,3 +164,17 @@ TEST(Cpputest_fff, CustomReturnValueDelegateSequences)
   voidfunc1outparam(&a);
   CHECK_EQUAL('z', a);
 }
+
+TEST(Cpputest_fff, ReturnValueHistory)
+{
+  long myReturnVals[3] = {3, 7, 9};
+  SET_RETURN_SEQ(longfunc0, myReturnVals, 3);
+
+  longfunc0();
+  longfunc0();
+  longfunc0();
+
+  LONGS_EQUAL(myReturnVals[0], longfunc0_fake.return_val_history[0]);
+  LONGS_EQUAL(myReturnVals[1], longfunc0_fake.return_val_history[1]);
+  LONGS_EQUAL(myReturnVals[2], longfunc0_fake.return_val_history[2]);
+}
